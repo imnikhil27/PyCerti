@@ -10,8 +10,8 @@ import os
 import xlrd
 
 
-def mailNow(toaddr):
-    fromaddr = ""  # Sender's mail
+def Mail(toaddr):
+    fromaddr = ""  # SENDER'S MAIL
     msg = MIMEMultipart()
 
     msg['From'] = fromaddr
@@ -22,8 +22,8 @@ def mailNow(toaddr):
 
     msg.attach(MIMEText(body, 'plain'))
 
-    filename = 'xyz.jpeg'  # File name with extension to be attached
-    # Location of file.. Example - Here sample is a directory in which our file xyz.jpeg exists.
+    filename = 'xyz.jpeg'  # File name with extension to be attached in mail
+    # Location of file. Example -> Here sample is a directory in which our file xyz.jpeg exists.
     attachment = open("sample/" + filename,"rb")
     part = MIMEBase('application', 'octet-stream')
     part.set_payload((attachment).read())
@@ -40,8 +40,8 @@ def mailNow(toaddr):
     server.quit()
 
 
-def make_certi(name, college, email):
-    img = Image.open("img.jpeg")  # Replace img with name of your Image or Certificate you want to edit
+def CreateCerti(name, college, email):
+    img = Image.open("img.jpeg")  # Replace img with name of your Image or Certificate you want to write to
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("font1.ttf", 50)
     # select position to draw text on certificate as per your need
@@ -50,15 +50,17 @@ def make_certi(name, college, email):
     font = ImageFont.truetype("font1.ttf", 40)
     draw.text((100, 350), college, (0, 0, 0), font=font)
 
-    # This will create a new directory(here named certificates) and then we'll save generated certificates into that
+    # This will create a new directory(here named certificates) and then will save all the generated certificates their
     if not os.path.exists('certificates'):
         os.makedirs('certificates')
 
     img.save('certificates/' + name + '.jpeg', "JPEG", resolution=100.0)
-    # Uncomment the call to mailNow() and this will mail the file for you if you want
-    # mailNow(email)
+    # Uncomment the below call to mailNow() and this will mail the file for you if you want
+    # Mail(email)
 
-# Replace sheet1.xlsx with your File to be read(keep it in the same directory as that of script)
+    
+    
+# Replace sheet1.xlsx with your Excel file to be read(keep the file in the same directory as that of script)
 loc = ("sheet1.xlsx")
 wb = xlrd.open_workbook(loc)
 sheet = wb.sheet_by_index(0)
@@ -66,4 +68,4 @@ sheet.cell_value(0, 0)
 
 for i in range(sheet.nrows):
     # Choose cells as per your need to retrieve data from file. Top left cell is (0,0)
-    make_certi(sheet.cell_value(i, 1), sheet.cell_value(i, 2),sheet.cell_value(i, 3))
+    CreateCerti(sheet.cell_value(i, 1), sheet.cell_value(i, 2),sheet.cell_value(i, 3))
