@@ -1,9 +1,8 @@
 # PyCerti
-Generate certificates (or any image) with text written as per your need (and mail them too for you if you want).
+Using this python script, you can create certificates with text on them as you need and mail them to the required people.
 
-Just place a certificate template, font file (.ttf) and an excel sheet(.xlsx)(to retrieve information) in the same directory as that of script.
-Go through the code and check comments to know how to use the script.
+## Instructions to Use:
 
-Also you can use mailNow method which will mail the file to the mail to the address you want.
+Just place a certificate template, font file (.ttf) of the font you wish to write text with and an excel sheet(.xlsx) (having the data to be written on the certificate and email addresses to which the certificate will be mailed) in the same directory as that of the script.
 
-PS - I made this script to generate and mail participation and winning certificates for college events. Use this if you are too lazy to do it manually.
+Also, go through the code and check comments to know better on how to use the script.
